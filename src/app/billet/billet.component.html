@@ -1,0 +1,50 @@
+<h2>💳 Bienvenido a tu billetera</h2>
+<nav class="tabs">
+  <li (click)="selectedTab=1" [class.active]="selectedTab===1">Ingresos 💰</li>
+  <li (click)="selectedTab=2" [class.active]="selectedTab===2">Gastos 💸</li>
+  <li (click)="selectedTab=3" [class.active]="selectedTab===3">Ver Saldo 📊</li>
+</nav>
+
+<div *ngIf="selectedTab===1">Contenido de Ingresos</div>
+<div *ngIf="selectedTab===2">Contenido de Gastos</div>
+<div *ngIf="selectedTab===3">Contenido de Saldo</div>
+
+<div *ngIf="selectedTab===1" class="tab-content">
+  <h3>Agregar Ingreso</h3>
+  <input type="text" #desc placeholder="Descripción">
+  <input type="number" #monto placeholder="Monto">
+  <button (click)="agregarIngreso(desc.value, monto.valueAsNumber); desc.value=''; monto.value=''">Agregar</button>
+
+  <div class="lista">
+    <h4>Ingresos registrados:</h4>
+    <ul>
+      <li *ngFor="let ingreso of ingresos">{{ ingreso.descripcion }} - ${{ ingreso.monto }}</li>
+    </ul>
+  </div>
+</div>
+
+
+<div *ngIf="selectedTab===2" class="tab-content">
+  <h3>Agregar Gasto</h3>
+  <input type="text" #descG placeholder="Descripción">
+  <input type="number" #montoG placeholder="Monto">
+  <button (click)="agregarGasto(descG.value, montoG.valueAsNumber); descG.value=''; montoG.value=''">Agregar</button>
+
+  <div class="lista">
+    <h4>Gastos registrados:</h4>
+    <ul>
+      <li *ngFor="let gasto of gastos">{{ gasto.descripcion }} - ${{ gasto.monto }}</li>
+    </ul>
+  </div>
+</div>
+
+
+<div *ngIf="selectedTab===3" class="tab-content">
+  <h3>📊 Ver Saldo</h3>
+  <div class="card balance-card">
+    <p>Ingresos: ${{ getTotalIngresos() }}</p>
+    <p>Gastos: ${{ getTotalGastos() }}</p>
+    <hr>
+    <h4>Balance: ${{ getTotalIngresos() - getTotalGastos() }}</h4>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<h3>💸 Agregar Gastos</h3>
+<div class="card">
+  <input type="text" [(ngModel)]="descripcion" placeholder="Descripción" />
+  <input type="number" [(ngModel)]="monto" placeholder="Monto" />
+  <button (click)="agregarGasto()">Agregar</button>
+</div>
+
+<div class="lista">
+  <h4>Gastos registrados:</h4>
+  <ul>
+    <li *ngFor="let gasto of gastos">{{ gasto.descripcion }} - ${{ gasto.monto }}</li>
+  </ul>
+</div>
